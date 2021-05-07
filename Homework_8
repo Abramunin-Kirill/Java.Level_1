@@ -1,0 +1,81 @@
+package lessons.Lesson_8;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Counter extends JFrame {
+    private int value;
+
+    public Counter(int initial) {
+        setBounds(500,300,300,120);
+        setTitle("Счётчик");
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        Font font = new Font ("Arial", Font.BOLD, 32);
+
+        JTextField counterValue = new JTextField();
+        counterValue.setFont(font);
+        counterValue.setHorizontalAlignment(SwingConstants.CENTER);
+        add(counterValue, BorderLayout.CENTER);
+
+  /*    JLabel counterValue = new JLabel(); // Это абзац из урока заменил на абзац кода выше по заданию
+        counterValue.setFont(font);
+        counterValue.setHorizontalAlignment(SwingConstants.CENTER);
+        counterValue.setVerticalAlignment(SwingConstants.CENTER);
+        add(counterValue, BorderLayout.CENTER);
+   */
+
+        value = initial;
+        counterValue.setText(String.valueOf(value));
+
+
+        JButton decreaseButton = new JButton("<");
+        JButton incrementButton = new JButton(">");
+        decreaseButton.setFont(font);
+        incrementButton.setFont(font);
+        add(decreaseButton, BorderLayout.WEST);
+        add(incrementButton, BorderLayout.EAST);
+
+
+
+        decreaseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                value--;
+                counterValue.setText(String.valueOf(value));
+            }
+        });
+
+        incrementButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                value++;
+                counterValue.setText(String.valueOf(value));
+            }
+        });
+        // 1:39:58
+
+        counterValue.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    value = Integer.parseInt(counterValue.getText());
+                } catch (NumberFormatException e) {
+//                    e.printStackTrace(); // "для ошибки empty catch block"
+                }
+                System.out.println(counterValue.getText());
+            }
+        });
+
+
+
+        setVisible(true);
+    }
+
+
+    public static void main(String[] args) {
+        new Counter(1);
+    }
+}

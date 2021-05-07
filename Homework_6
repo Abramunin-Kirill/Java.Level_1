@@ -1,0 +1,129 @@
+// - Первый класс из пакета
+package lessons.Lesson_6;
+
+public abstract class Animal { // Добавил "abstract" для класса
+    String name;
+
+    public Animal() {    }
+
+    public Animal(String name) {
+        this.name = name;
+    } // С урока
+
+    public abstract void animalInfo(); // Абстрактный метод для переопределения в дальнейшем
+
+    public abstract void animalRun(); // Абстрактный метод для переопределения в дальнейшем
+
+    public abstract void animalSwimm(); // Абстрактный метод для переопределения в дальнейшем
+
+    //public void jump() {System.out.println("Животное подпрыгнуло"); } // С урока
+}
+
+
+
+
+
+// - Второй класс из пакета
+package lessons.Lesson_6;
+
+import java.util.Scanner; // Утилита для ввода в консоль
+
+public class Cat extends Animal{ // extends Animal - наследование
+    String color;
+
+    public Cat(String name, String color) {
+        this.name = name;
+        this.color = color;
+    }
+
+    @Override // Здесь и далее знак для переопределения (не знаю, нужно ли было использовать его везде, это вроде бы необязательно)
+    public void animalInfo() {
+        System.out.println("Имя кота: " + name + ", цвет: " + color);
+    }
+
+    @Override
+    public void animalRun() { // Бег кота
+        System.out.println("Наши животные могут бежать и плыть. В качества параметра каждому передается длина препятствия." + "\n" + "Для начала испытаем Вашу смекалку в беговой дисциплине. Пожалуйста, введите в консоль дистанцию забега для кота (в метрах):");
+        Scanner num = new Scanner(System.in);
+        int i;
+        i = num.nextInt();
+        if (i > 0 && i <= 200) {
+            System.out.println("Кот успешно пробежал " + i + " м. Вы молодец! Перейдем к другому нашему четвероногому другу. Укажите дистанцию для собаки: ");
+        } else System.out.println("Ну что Вы, кот на такое никогда не согласится. " + i + " метров - это слишком много для него. Попробуйте ещё раз, но теперь укажите дистанцию для собаки: ");
+    }
+
+    @Override
+    public void animalSwimm() { // Плавание кота
+        Scanner num = new Scanner(System.in);
+        int i;
+        i = num.nextInt();
+        if (i == 0) {
+            System.out.println("Здорово! Вы правильно предположили, что кот ни за что не согласится плавать! Очередь собаки, вводите дистанцию: ");
+        } else System.out.println("Кот утонул. Вероятно, Вы забыли, что коты боятся воды. С собакой такого не случится, вводите дистанцию: ");
+    }
+
+}
+
+
+
+
+
+// - Третий класс из пакета
+package lessons.Lesson_6;
+
+import java.util.Scanner; // Утилита для ввода в консоль
+
+public class Dog extends Animal{ // extends Animal - наследование
+    String color;
+
+    public Dog(String name, String color) {
+        this.name = name;
+        this.color = color;
+    }
+
+    @Override
+    public void animalInfo() { System.out.println("Кличка собаки: " + name + ", цвет: " + color); }
+
+    @Override
+    public void animalRun() { // Бег собаки
+        Scanner num = new Scanner(System.in);
+        int i;
+        i = num.nextInt();
+        if (i > 0 && i <= 500) {
+            System.out.println("Собака успешно пробежала " + i + " м. Вы молодец! Перейдем к плаванию. Первым начнёт Кот. Укажите дистанцию для него: ");
+        } else System.out.println("Ну что Вы, даже для собаки это слишком много. Перейдем к плаванию. Первым начнёт Кот. Укажите дистанцию для него: ");
+    }
+
+    @Override
+    public void animalSwimm() { // Плавание собаки
+        Scanner num = new Scanner(System.in);
+        int i;
+        i = num.nextInt();
+        if (i >= 0 && i <= 10) {
+            System.out.println("Собака успешно проплыла " + i + " м. Вы справились с заданием!");
+        } else System.out.println("Простите, но для собаки это многовато. Если Вы хотите попробовать ещё раз, запустите программу снова. Удачи!");
+    }
+    
+    
+    
+    
+  
+  
+  // - Четвертый класс из пакета
+package lessons.Lesson_6;
+
+public class AnimalsApp {
+    public static void main(String[] args) {
+        System.out.println("В нашем распоряжении имеются животные: кот и собака");
+        Cat cat = new Cat("Барсик", "Белый");
+        Dog dog = new Dog("Сеня", "Коричневый");
+        cat.animalInfo(); //Вывод переопределенного метода: информация о коте
+        dog.animalInfo(); //Вывод переопределенного метода: информация о собаке
+        cat.animalRun(); //Вывод переопределенного метода: бег кота
+        dog.animalRun(); //Вывод переопределенного метода: бег собаки
+        cat.animalSwimm(); //Вывод переопределенного метода: плавание кота
+        dog.animalSwimm(); //Вывод переопределенного метода: плавание собаки
+        System.out.println("На этом всё! Всего хорошего!");
+    }
+
+  
